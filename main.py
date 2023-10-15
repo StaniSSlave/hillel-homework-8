@@ -16,13 +16,13 @@
 import re
 task_n = 1
 
-while task_n != 3:
+while task_n != 5:
     try:
         task_n = int(input("Select please task number, that you want to check: \n"
                            "\t1. Перевірка домашнього номеру тф.\n"
                            "\t2. Перевірка мобільного номеру тф.\n"
                            "\t3. Перевірка email.\n"
-                           "\t4. Перевірка ПІБ."
+                           "\t4. Перевірка ПІБ.\n"
                            "\t5. Stop checking tasks\n"
                            "Enter choise here: "))
 
@@ -67,14 +67,21 @@ while task_n != 3:
                     a = 0
                     while a != 1:
                         try:
-                            home_number = input("Enter you home phone number(6-num format): ")
-                            if re.match(r"\d{6}", home_number) and len(home_number) == 6:
+                            home_number = input("Enter you mobile phone number with the country code: ")
+                            if re.match(r"[+]{1}+\d{12}", home_number) and len(home_number) == 13:
                                 print("Your number saved successfully!")
                                 a = 1
-                            elif re.search(r"[^0-9]",home_number) and re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
+                            elif re.match(r"\d{12}", home_number) and len(home_number) == 12:
+                                print("Your number saved successfully!")
+                                a = 1
+                            elif len(home_number) != 12:
+                                raise Exception("Enter please only 12 numbers")
+                            elif re.search(r"[+]{2,100}", home_number) or re.search(r"\+", home_number).start() != 0:
+                                raise Exception("Something went wrong with \"+\" symbol!")
+                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
                                 raise Exception("Enter only integers, please!")
                             else:
-                                raise Exception("Enter please only 6 numbers")
+                                "Oops! Something went wrong! try one more time"
                         except Exception as e:
                             print(f"\tError: {e}")
 
@@ -96,7 +103,32 @@ while task_n != 3:
                 finish_t3_l = "y"
                 while finish_t3_l == "y":
 
-                    print("3")
+                    a = 0
+                    while a != 1:
+                        try:
+                            home_number = input("Enter your email, please. "
+                                                "Email should consist of 6 letters in username and "
+                                                "8 characters in domain including \".\"\n"
+                                                "Example: stassk@qwer.tyu.\n"
+                                                "Enter yours here:")
+                            if (re.search(r".", home_number).start() + re.search(r".", home_number).end()) != re.search(r".", home_number).start():
+                                print("Only one \".\" near to each other!")
+                            elif re.match(r"[a-zA-Z!#$%&'*+\-/=?^_`{|}~.]{6}+{8}", home_number) and len(home_number) == 13:
+                                print("Your number saved successfully!")
+                                a = 1
+                            elif re.match(r"\d{12}", home_number) and len(home_number) == 12:
+                                print("Your number saved successfully!")
+                                a = 1
+                            elif len(home_number) != 12:
+                                raise Exception("Enter please only 12 numbers")
+                            elif re.search(r"[+]{2,100}", home_number) or re.search(r"\+", home_number).start() != 0:
+                                raise Exception("Something went wrong with \"+\" symbol!")
+                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
+                                raise Exception("Enter only integers, please!")
+                            else:
+                                "Oops! Something went wrong! try one more time"
+                        except Exception as e:
+                            print(f"\tError: {e}")
 
                     while finish_t3_l != "y" or finish_t3_l != "n":
                         finish_t2 = input("Do you want to continue?\n"
