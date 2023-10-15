@@ -21,8 +21,8 @@ while task_n != 3:
         task_n = int(input("Select please task number, that you want to check: \n"
                            "\t1. Перевірка домашнього номеру тф.\n"
                            "\t2. Перевірка мобільного номеру тф.\n"
-                           "\t3. Перевірка домашнього номеру тф.\n"
-                           "\t4. Перевірка домашнього номеру тф."
+                           "\t3. Перевірка email.\n"
+                           "\t4. Перевірка ПІБ."
                            "\t5. Stop checking tasks\n"
                            "Enter choise here: "))
 
@@ -31,10 +31,19 @@ while task_n != 3:
                 finish_t1_l = "y"
                 while finish_t1_l == "y":
 
-                    home_number = input("Enter you home phone number: ")
-                    if re.match("\d{6}", home_number):
-                        print("Your number saved successfully!")
-                    else:
+                    a = 0
+                    while a != 1:
+                        try:
+                            home_number = input("Enter you home phone number(6-num format): ")
+                            if re.match(r"\d{6}", home_number) and len(home_number) == 6:
+                                print("Your number saved successfully!")
+                                a = 1
+                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
+                                raise Exception("Enter only integers, please!")
+                            else:
+                                raise Exception("Enter please only 6 numbers")
+                        except Exception as e:
+                            print(f"\tError: {e}")
 
 
                     while finish_t1_l != "y" or finish_t1_l != "n":
@@ -55,7 +64,19 @@ while task_n != 3:
                 finish_t2_l = "y"
                 while finish_t2_l == "y":
 
-                    print("2")
+                    a = 0
+                    while a != 1:
+                        try:
+                            home_number = input("Enter you home phone number(6-num format): ")
+                            if re.match(r"\d{6}", home_number) and len(home_number) == 6:
+                                print("Your number saved successfully!")
+                                a = 1
+                            elif re.search(r"[^0-9]",home_number) and re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
+                                raise Exception("Enter only integers, please!")
+                            else:
+                                raise Exception("Enter please only 6 numbers")
+                        except Exception as e:
+                            print(f"\tError: {e}")
 
                     while finish_t2_l != "y" or finish_t2_l != "n":
                         finish_t2 = input("Do you want to continue?\n"
