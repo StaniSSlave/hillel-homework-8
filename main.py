@@ -67,21 +67,21 @@ while task_n != 5:
                     a = 0
                     while a != 1:
                         try:
-                            home_number = input("Enter you mobile phone number with the country code: ")
-                            if re.match(r"[+]{1}+\d{12}", home_number) and len(home_number) == 13:
+                            mob_number = input("Enter you mobile phone number with the country code: ")
+                            if re.match(r"[+]{1}+\d{12}", mob_number) and len(mob_number) == 13:
                                 print("Your number saved successfully!")
                                 a = 1
-                            elif re.match(r"\d{12}", home_number) and len(home_number) == 12:
+                            elif re.match(r"\d{12}", mob_number) and len(mob_number) == 12:
                                 print("Your number saved successfully!")
                                 a = 1
-                            elif len(home_number) != 12:
+                            elif len(mob_number) != 12:
                                 raise Exception("Enter please only 12 numbers")
-                            elif re.search(r"[+]{2,100}", home_number) or re.search(r"\+", home_number).start() != 0:
+                            elif re.search(r"[+]{2,100}", mob_number) or re.search(r"\+", mob_number).start() != 0:
                                 raise Exception("Something went wrong with \"+\" symbol!")
-                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
+                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",mob_number):
                                 raise Exception("Enter only integers, please!")
                             else:
-                                "Oops! Something went wrong! try one more time"
+                                raise Exception("Oops! Something went wrong! try one more time")
                         except Exception as e:
                             print(f"\tError: {e}")
 
@@ -106,27 +106,22 @@ while task_n != 5:
                     a = 0
                     while a != 1:
                         try:
-                            home_number = input("Enter your email, please. "
+                            email = input("Enter your email, please. "
                                                 "Email should consist of 6 letters in username and "
-                                                "8 characters in domain including \".\"\n"
+                                                "8 characters in domain after \"@\"\n"
                                                 "Example: stassk@qwer.tyu.\n"
                                                 "Enter yours here:")
-                            if (re.search(r".", home_number).start() + re.search(r".", home_number).end()) != re.search(r".", home_number).start():
-                                print("Only one \".\" near to each other!")
-                            elif re.match(r"[a-zA-Z!#$%&'*+\-/=?^_`{|}~.]{6}+{8}", home_number) and len(home_number) == 13:
-                                print("Your number saved successfully!")
+                            if (re.search(r".", email).start() + re.search(r".", email).end()) != re.search(r".", email).start():
+                                raise Exception("Only one \".\" near to each other!")
+                            elif re.search(r"\-", email).start() != 7 and re.search(r"\-", email).start() != 14:
+                                raise Exception("\"-\" can't be as the first or last symbol of the domain!")
+                            elif len(email) != 15:
+                                raise Exception("Ensure, that you enter correct number of characters!")
+                            elif re.match(r"^[a-zA-Z!#$%&'*+\-/=?^_`{|}~.]{6}+[@]{1}+[a-zA-Z\-.]{8}$", email) and len(email) == 15:
+                                print("Your email saved successfully!")
                                 a = 1
-                            elif re.match(r"\d{12}", home_number) and len(home_number) == 12:
-                                print("Your number saved successfully!")
-                                a = 1
-                            elif len(home_number) != 12:
-                                raise Exception("Enter please only 12 numbers")
-                            elif re.search(r"[+]{2,100}", home_number) or re.search(r"\+", home_number).start() != 0:
-                                raise Exception("Something went wrong with \"+\" symbol!")
-                            elif re.search(r"[a-zA-ZА-Яа-яЇїІіЄєҐґ]",home_number):
-                                raise Exception("Enter only integers, please!")
                             else:
-                                "Oops! Something went wrong! try one more time"
+                                raise Exception("Oops! Something went wrong! try one more time")
                         except Exception as e:
                             print(f"\tError: {e}")
 
@@ -148,7 +143,21 @@ while task_n != 5:
                 finish_t4_l = "y"
                 while finish_t4_l == "y":
 
-                    print("4")
+                    a = 0
+                    while a != 1:
+                        try:
+                            initials = input("Enter your Initials, please: ")
+                            if re.match(r"^[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}+[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}+[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}", initials):
+                                print("Your initials saved successfully!")
+                                a = 1
+                            elif re.match(r"\d{12}", mob_number) and len(mob_number) == 12:
+                                raise Exception("Do not use numbers, please!")
+                            elif re.findall(r" ", mob_number) != 2:
+                                raise Exception("Enter only three words!")
+                            else:
+                                raise Exception("Oops! Something went wrong! try one more time")
+                        except Exception as e:
+                            print(f"\tError: {e}")
 
                     while finish_t4_l != "y" or finish_t4_l != "n":
                         finish_t2 = input("Do you want to continue?\n"
