@@ -147,13 +147,13 @@ while task_n != 5:
                     while a != 1:
                         try:
                             initials = input("Enter your Initials, please: ")
-                            if re.match(r"^[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}+[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}+[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}", initials):
+                            if re.match(r"^[a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20} [a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20} [a-zA-ZА-Яа-яЇїІіЄєҐґ']{2,20}", initials):
                                 print("Your initials saved successfully!")
                                 a = 1
-                            elif re.match(r"\d{12}", mob_number) and len(mob_number) == 12:
+                            elif re.search(r"\d", initials):
                                 raise Exception("Do not use numbers, please!")
-                            elif re.findall(r" ", mob_number) != 2:
-                                raise Exception("Enter only three words!")
+                            elif len(re.findall(r" ", initials)) != 2:
+                                raise Exception("Enter three words, please!")
                             else:
                                 raise Exception("Oops! Something went wrong! try one more time")
                         except Exception as e:
