@@ -68,7 +68,7 @@ while task_n != 5:
                     while a != 1:
                         try:
                             mob_number = input("Enter you mobile phone number with the country code: ")
-                            if re.match(r"[+]{1}+\d{12}", mob_number) and len(mob_number) == 13:
+                            if re.match(r"[+]{1}\d{12}", mob_number) and len(mob_number) == 13:
                                 print("Your number saved successfully!")
                                 a = 1
                             elif re.match(r"\d{12}", mob_number) and len(mob_number) == 12:
@@ -117,7 +117,7 @@ while task_n != 5:
                                 raise Exception("\"-\" can't be as the first or last symbol of the domain!")
                             elif len(email) != 15:
                                 raise Exception("Ensure, that you enter correct number of characters!")
-                            elif re.match(r"^[a-zA-Z!#$%&'*+\-/=?^_`{|}~.]{6}+[@]{1}+[a-zA-Z\-.]{8}$", email) and len(email) == 15:
+                            elif re.match(r"^[a-zA-Z!#$%&'*+\-/=?^_`{|}~.]{6}[@]{1}[a-zA-Z\-.]{8}$", email) and len(email) == 15:
                                 print("Your email saved successfully!")
                                 a = 1
                             else:
